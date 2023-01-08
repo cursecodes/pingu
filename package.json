@@ -5,7 +5,8 @@
   "main": "src/index.js",
   "type": "module",
   "scripts": {
-    "start": "node src/deploy.js && node src/index.js"
+    "start": "node src/deploy.js && node src/index.js",
+    "dev": "NODE_ENV=development node src/deploy.js && node src/index.js"
   },
   "keywords": [],
   "author": "",
