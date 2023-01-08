@@ -17,7 +17,6 @@ export default {
         {
           name: ":stopwatch: Uptime",
           value: `\`${Math.round(interaction.client.uptime / 60000)} minutes\``,
-          inline: true,
         },
         {
           name: ":sparkling_heart: WS heartbeat",
@@ -29,6 +28,10 @@ export default {
           value: `\`${
             sent.createdTimestamp - interaction.createdTimestamp
           }ms\``,
+        },
+        {
+          name: ":flag_de: Hosting",
+          value: "Hosted in Germany on Koyeb",
           inline: true,
         },
       ],
