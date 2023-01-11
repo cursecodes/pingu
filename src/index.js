@@ -3,6 +3,7 @@ import path from "node:path";
 import * as url from "node:url";
 import { Client, Collection, Events, GatewayIntentBits } from "discord.js";
 import express from "express";
+import axios from "axios";
 
 const app = express();
 
@@ -68,8 +69,48 @@ client.on(Events.InteractionCreate, async (interaction) => {
       content: "There was an error while executing this command!",
       ephemeral: true,
     });
+
+    const data = JSON.stringify({
+      project: "pingu",
+      channel: "errors",
+      event: "Command Error",
+      description: error.message,
+      icon: "💣",
+      notify: true,
+    });
+
+    axios({
+      method: "post",
+      url: "https://api.logsnag.com/v1/log",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${process.env.LOGSNAG_TOKEN}`,
+      },
+      data: data,
+    });
   }
 });
 
 // Log in to Discord with your client's token
-client.login(token);
+try {
+  client.login(token);
+} catch (error) {
+  const data = JSON.stringify({
+    project: "pingu",
+    channel: "errors",
+    event: "Bot Crashed",
+    description: error.message,
+    icon: "💣",
+    notify: true,
+  });
+
+  axios({
+    method: "post",
+    url: "https://api.logsnag.com/v1/log",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${process.env.LOGSNAG_TOKEN}`,
+    },
+    data: data,
+  });
+}
