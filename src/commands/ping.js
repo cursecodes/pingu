@@ -12,7 +12,7 @@ export default {
 
     const pingEmbed = {
       title: ":ping_pong: Pong!",
-      color: 3553598,
+      color: 3092791,
       fields: [
         {
           name: ":stopwatch: Uptime",
