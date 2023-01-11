@@ -2,6 +2,15 @@ import fs from "node:fs";
 import path from "node:path";
 import * as url from "node:url";
 import { Client, Collection, Events, GatewayIntentBits } from "discord.js";
+import express from "express";
+
+const app = express();
+
+app.get("/", (req, res) => {
+  res.send("ok");
+});
+
+app.listen(process.env.PORT || 8000);
 
 import dotenv from "dotenv";
 
